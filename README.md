@@ -1,1 +1,1 @@
-# -image-processing
+# image-processing
