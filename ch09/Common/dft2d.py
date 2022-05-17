@@ -35,4 +35,15 @@ def fftshift(img):
     dst[h-cy:, 0:cx] = np.copy(img[0:cy, w-cx:])
     return dst
 
+def FFT(image, mode=2):
+    dft = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
+    dft = fftshift(dft)
+    spectrum = calc_spectrum(dft)
+    return dft, spectrum
+
+def IFFT(dft, shape, mode=2):
+    dft = fftshift(dft)
+    img = cv2.idft(dft, flags=cv2.DFT_SCALE)[:,:,0]
+    img = img[:shape[0], :shape[1]]
+    return cv2.convertScaleAbs(img)
 
