@@ -16,6 +16,7 @@ def idft(g):
     dst = [sum(g[n] * exp(-k*n/N) for n in range(N)) for k in range(N)]
     return np.array(dst)/N
 
+# 로그함수를 통해 잘 보이도록 스팩트럼을 만듦 = 범위를 줄임(시각화)
 def calc_spectrum(complex):
     if complex.ndim==2:
         dst = abs(complex)
@@ -25,6 +26,7 @@ def calc_spectrum(complex):
     cv2.normalize(dst, dst, 0, 255, cv2.NORM_MINMAX)
     return cv2.convertScaleAbs(dst)
 
+# 셔플링, 센터를 기준으로 총 4개로 쪼개고 위치를 서로 바꿈
 def fftshift(img):
     dst = np.zeros(img.shape, img.dtype)
     h, w = dst.shape[:2]
